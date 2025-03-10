@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile - Merawat Indonesia</title>
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/img/favicon-16x16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/img/favicon-32x32.png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* Profile specific styles */
+      .profile-header {
+        position: relative;
+        margin-top: 1rem;
+        padding: 0 1rem;
+      }
+
+      .profile-avatar .avatar-container {
+        position: relative;
+        display: inline-block;
+      }
+
+      .profile-avatar .avatar-container img {
+        width: 150px;
+        height: 150px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -45px;
+        border: 6px solid white;
+        border-radius: 50%;
+      }
+
+      .profile-info {
+        text-align: center;
+        margin-top: 3rem;
+        padding-top: 1rem;
+      }
+
+      .profile-info h4 {
+        font-weight: bold;
+        color: #e32929;
+        margin-bottom: 0.5rem;
+        font-size: 1.2rem;
+      }
+
+      .profile-info p {
+        color: #6c757d;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        font-size: 12px;
+      }
+
+      /* Verification Badge */
+      .verification-badge {
+        background-color: #fef2f2;
+        color: #ef4444;
+        border-radius: 20px;
+        padding: 4px 12px;
+        font-size: 12px;
+        display: inline-flex;
+        align-items: center;
+        margin: 10px 0;
+      }
+
+      .verification-badge img {
+        margin-right: 5px;
+        width: 16px;
+        height: 16px;
+      }
+
+      /* Social Media Icons */
+      .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 0.75rem;
+        margin: 0.75rem 0;
+      }
+
+      .social-icons a {
+        cursor: pointer;
+      }
+
+      .social-icons img {
+        width: 40px;
+      }
+
+      /* Stats Section */
+      .stats-container {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 15px;
+        margin-bottom: 10px;
+        background-color: #ffffff;
+      }
+
+      .stat-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 25%;
+      }
+
+      .stat-top-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 5px;
+      }
+
+      .stat-icon {
+        background-color: #ffeeee;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 8px;
+      }
+
+      .stat-icon img {
+        width: 20px;
+        height: 20px;
+      }
+
+      .stat-number {
+        font-weight: bold;
+        font-size: 20px;
+        margin: 0;
+        line-height: 1;
+      }
+
+      .stat-label {
+        font-size: 11px;
+        color: #666;
+        text-align: center;
+        margin: 5px 0 0;
+        width: 100%;
+      }
+
+      /* Gradient Cards */
+      .gradient-bg {
+        background: linear-gradient(90deg, #bd2727 0%, #ff4747 100%);
+        color: white;
+      }
+
+      .donation-card {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .donation-card-icon {
+        max-width: 30px;
+        margin-right: 0.5rem;
+      }
+
+      .donation-card-text {
+        display: flex;
+        flex-direction: column; /* Changed from flex-column: column */
+        text-align: start;
+      }
+
+      .donation-card-text p {
+        color: white;
+        margin-bottom: 0;
+      }
+
+      /* Campaign Section */
+      .kampanye-item {
+        margin-top: 1rem;
+      }
+
+      .kampanye-item h3 {
+        font-size: 16px;
+        margin: 5px 0;
+        font-weight: bold;
+        color: #333;
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 480px) {
+        .stat-number {
+          font-size: 16px;
+        }
+
+        .stat-icon {
+          width: 30px;
+          height: 30px;
+          margin-right: 3px;
+        }
+
+        .stat-icon img {
+          width: 16px;
+          height: 16px;
+        }
+
+        .stat-label {
+          font-size: 9px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="col-12 justify-content-center d-flex">
+      <div class="col-12 bg-white col-md-6">
+        <!-- Profile Header -->
+        <div class="profile-header">
+          <img
+            src="assets/img/banner/banner-slider.png"
+            alt="Banner"
+            class="w-100 rounded-3"
+          />
+          <div class="profile-avatar text-center">
+            <div class="avatar-container">
+              <img
+                src="assets/img/avatar/main-avatar.png"
+                alt="Merawat Indonesia"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile Info -->
+        <div class="profile-info">
+          <h4>Merawat Indonesia</h4>
+          <div class="verification-badge">
+            <img src="assets/img/icon/verify.svg" alt="Verified" />
+            Akun Terverifikasi
+          </div>
+          <p>
+            Selamat Datang di Sinergi Bersama Merawat Indonesia<br />
+            Organisasi Penggalangan Dana Anda Dapat Mengikuti Sosial Media
+            Kami<br />
+            Untuk Melihat Aktivitas Kegiatan Kami
+          </p>
+
+          <!-- Social Media Icons -->
+          <div class="social-icons">
+            <a href="#" aria-label="Instagram">
+              <img src="assets/img/icon/instagram.svg" alt="Instagram" />
+            </a>
+            <a href="#" aria-label="YouTube">
+              <img src="assets/img/icon/youtube.svg" alt="YouTube" />
+            </a>
+            <a href="#" aria-label="Facebook">
+              <img src="assets/img/icon/sosmed-fb.svg" alt="Facebook" />
+            </a>
+            <a href="#" aria-label="TikTok">
+              <img src="assets/img/icon/tiktok.svg" alt="TikTok" />
+            </a>
+          </div>
+        </div>
+
+        <!-- Line spacing -->
+        <div class="line-spacing"></div>
+
+        <!-- Container for Stats and Cards -->
+        <div class="container">
+          <!-- Stats Section -->
+          <div class="stats-container">
+            <div class="stat-item">
+              <div class="stat-top-row">
+                <div class="stat-icon">
+                  <img
+                    src="assets/img/icon/total-donatur.svg"
+                    alt="Total Donatur"
+                  />
+                </div>
+                <p class="stat-number">829</p>
+              </div>
+              <p class="stat-label">Total Donatur</p>
+            </div>
+
+            <div class="stat-item">
+              <div class="stat-top-row">
+                <div class="stat-icon">
+                  <img
+                    src="assets/img/icon/total-kampanye.svg"
+                    alt="Total Kampanye"
+                  />
+                </div>
+                <p class="stat-number">10</p>
+              </div>
+              <p class="stat-label">Total Kampanye</p>
+            </div>
+
+            <div class="stat-item">
+              <div class="stat-top-row">
+                <div class="stat-icon">
+                  <img
+                    src="assets/img/icon/kabar-terbaru.svg"
+                    alt="Kabar Terbaru"
+                  />
+                </div>
+                <p class="stat-number">829</p>
+              </div>
+              <p class="stat-label">Kabar Terbaru</p>
+            </div>
+
+            <div class="stat-item">
+              <div class="stat-top-row">
+                <div class="stat-icon">
+                  <img
+                    src="assets/img/icon/doa-orang-baik.svg"
+                    alt="Doa Orang Baik"
+                  />
+                </div>
+                <p class="stat-number">829</p>
+              </div>
+              <p class="stat-label">Doa Orang Baik</p>
+            </div>
+          </div>
+
+          <!-- Donation Cards Section -->
+          <div class="row mt-3 mb-3 mx-auto d-flex justify-content-center">
+            <div class="col-6 d-flex justify-content-center">
+              <div class="gradient-bg rounded p-3 w-100 shadow-sm text-center">
+                <div class="donation-card">
+                  <img
+                    src="assets/img/icon/total-donatur.svg"
+                    alt="Total Donasi Terkumpul"
+                    class="donation-card-icon"
+                  />
+                  <div class="donation-card-text">
+                    <p class="fw-bold">Rp 25.000.000</p>
+                    <p class="small">Total Donasi Terkumpul</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 d-flex justify-content-center">
+              <div class="gradient-bg rounded p-3 w-100 shadow-sm text-center">
+                <div class="donation-card">
+                  <img
+                    src="assets/img/icon/dompet.svg"
+                    alt="Total Pencairan Dana"
+                    class="donation-card-icon"
+                  />
+                  <div class="donation-card-text">
+                    <p class="fw-bold">Rp 25.000.000</p>
+                    <p class="small">Total Pencairan Dana</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Line spacing -->
+        <div class="line-spacing"></div>
+
+        <!-- Galang Dana terbaru Section -->
+        <div class="container">
+          <div class="row kampanye mt-4 mb-5">
+            <div class="justify-content-between d-flex px-3">
+              <h2 id="kategoriTitle">Galang Dana Terbaru</h2>
+            </div>
+
+            <!-- Campaign Item 1 -->
+            <a href="/detail-kampanye.html" class="col-12 row mt-2 mx-0">
+              <div class="col-6 align-self-center ps-3 pe-2">
+                <img
+                  src="assets/img/kampanye/image-kampanye.png"
+                  class="bg-cover rounded"
+                  width="100%"
+                  height="100%"
+                  alt="Kampanye 1"
+                />
+              </div>
+              <div class="col-6 pe-3 ps-2 align-self-center">
+                <small class="p-0">
+                  Ruang Kita Peduli
+                  <img
+                    src="assets/img/icon/verify.svg"
+                    style="margin-top: -3px"
+                    alt="Verified"
+                  />
+                </small>
+                <h3>Bantu Dijual Koran Demi Nafkah Keluarga</h3>
+                <div class="progress mb-2">
+                  <div
+                    class="progress-bar progress-bar-striped bg-danger"
+                    role="progressbar"
+                    style="width: 25%"
+                    aria-valuenow="25"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  >
+                    25%
+                  </div>
+                </div>
+                <div class="row col-12 m-0 p-0">
+                  <div class="col-6 p-0 text-start">
+                    <strong>Rp 1.000.000</strong>
+                    <small>Terkumpul</small>
+                  </div>
+                  <div class="col-6 p-0 text-end">
+                    <strong>120</strong>
+                    <small>Hari Lagi</small>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <!-- Campaign Item 2 -->
+            <a href="/detail-kampanye.html" class="col-12 row mt-2 mx-0">
+              <div class="col-6 align-self-center ps-3 pe-2">
+                <img
+                  src="assets/img/kampanye/image-kampanye.png"
+                  class="bg-cover rounded"
+                  width="100%"
+                  height="100%"
+                  alt="Kampanye 2"
+                />
+              </div>
+              <div class="col-6 pe-3 ps-2 align-self-center">
+                <small class="p-0">
+                  Ruang Kita Peduli
+                  <img
+                    src="assets/img/icon/verify.svg"
+                    style="margin-top: -3px"
+                    alt="Verified"
+                  />
+                </small>
+                <h3>Bantu Dijual Koran Demi Nafkah Keluarga</h3>
+                <div class="progress mb-2">
+                  <div
+                    class="progress-bar progress-bar-striped bg-danger"
+                    role="progressbar"
+                    style="width: 25%"
+                    aria-valuenow="25"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  >
+                    25%
+                  </div>
+                </div>
+                <div class="row col-12 m-0 p-0">
+                  <div class="col-6 p-0 text-start">
+                    <strong>Rp 1.000.000</strong>
+                    <small>Terkumpul</small>
+                  </div>
+                  <div class="col-6 p-0 text-end">
+                    <strong>120</strong>
+                    <small>Hari Lagi</small>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <!-- Campaign Item 3 -->
+            <a href="/detail-kampanye.html" class="col-12 row mt-2 mx-0">
+              <div class="col-6 align-self-center ps-3 pe-2">
+                <img
+                  src="assets/img/kampanye/image-kampanye.png"
+                  class="bg-cover rounded"
+                  width="100%"
+                  height="100%"
+                  alt="Kampanye 3"
+                />
+              </div>
+              <div class="col-6 pe-3 ps-2 align-self-center">
+                <small class="p-0">
+                  Ruang Kita Peduli
+                  <img
+                    src="assets/img/icon/verify.svg"
+                    style="margin-top: -3px"
+                    alt="Verified"
+                  />
+                </small>
+                <h3>Bantu Dijual Koran Demi Nafkah Keluarga</h3>
+                <div class="progress mb-2">
+                  <div
+                    class="progress-bar progress-bar-striped bg-danger"
+                    role="progressbar"
+                    style="width: 25%"
+                    aria-valuenow="25"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  >
+                    25%
+                  </div>
+                </div>
+                <div class="row col-12 m-0 p-0">
+                  <div class="col-6 p-0 text-start">
+                    <strong>Rp 1.000.000</strong>
+                    <small>Terkumpul</small>
+                  </div>
+                  <div class="col-6 p-0 text-end">
+                    <strong>120</strong>
+                    <small>Hari Lagi</small>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+          <div class="main-menu">
+            <a href="index.html">
+              <img src="assets/img/main-menu/beranda.svg" alt="Beranda" />
+              <p>Beranda</p>
+            </a>
+            <a href="galang-dana.html">
+              <img
+                src="assets/img/main-menu/galang dana.svg"
+                alt="Galang Dana"
+              />
+              <p>Galang Dana</p>
+            </a>
+            <a href="eksplore-kampanye.html" class="donasi-menu">
+              <img src="assets/img/main-menu/donasi.svg" alt="Donasi" />
+              <p>Donasi</p>
+            </a>
+            <a href="leaderboard.html">
+              <img
+                src="assets/img/main-menu/leaderboard.svg"
+                alt="Leaderboard"
+              />
+              <p>Leaderboard</p>
+            </a>
+            <a href="profile.html" class="active">
+              <img src="assets/img/main-menu/profile.svg" alt="Profile" />
+              <p>Profile</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Add active class to current page in navigation
+        const currentPage = window.location.pathname.split("/").pop();
+        const navLinks = document.querySelectorAll(".main-menu a");
+
+        navLinks.forEach((link) => {
+          const linkHref = link.getAttribute("href");
+          if (linkHref === currentPage) {
+            link.classList.add("active");
+          }
+        });
+
+        // Tab functionality (if these elements exist on the page)
+        const riwayatBtn = document.getElementById("riwayatBtn");
+        const tersimpanBtn = document.getElementById("tersimpanBtn");
+        const dukunganBtn = document.getElementById("dukunganBtn");
+
+        if (riwayatBtn && tersimpanBtn && dukunganBtn) {
+          const riwayatSection = document.getElementById("riwayatSection");
+          const tersimpanSection = document.getElementById("tersimpanSection");
+          const dukunganSection = document.getElementById("dukunganSection");
+
+          function showSection(section, activeBtn) {
+            // Hide all sections
+            riwayatSection.style.display = "none";
+            tersimpanSection.style.display = "none";
+            dukunganSection.style.display = "none";
+
+            // Show selected section
+            section.style.display = "block";
+
+            // Reset all button styles
+            riwayatBtn.classList.remove("btn-danger");
+            riwayatBtn.classList.add("btn-outline-danger");
+            tersimpanBtn.classList.remove("btn-danger");
+            tersimpanBtn.classList.add("btn-outline-danger");
+            dukunganBtn.classList.remove("btn-danger");
+            dukunganBtn.classList.add("btn-outline-danger");
+
+            // Set active button style
+            activeBtn.classList.remove("btn-outline-danger");
+            activeBtn.classList.add("btn-danger");
+          }
+
+          // Set default view to Tersimpan
+          showSection(tersimpanSection, tersimpanBtn);
+
+          // Add click event listeners
+          riwayatBtn.addEventListener("click", function () {
+            showSection(riwayatSection, riwayatBtn);
+          });
+
+          tersimpanBtn.addEventListener("click", function () {
+            showSection(tersimpanSection, tersimpanBtn);
+          });
+
+          dukunganBtn.addEventListener("click", function () {
+            showSection(dukunganSection, dukunganBtn);
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leaderboard</title>
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/img/favicon-16x16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/img/favicon-32x32.png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* General Styles */
+      body {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+      }
+
+      /* Leaderboard Header Styles */
+      .leaderboard-title {
+        margin: 15px;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .leaderboard-subtitle {
+        margin: -10px 15px 15px;
+        font-size: 14px;
+        color: #666;
+      }
+
+      /* Leaderboard Item Styles */
+      .leaderboard-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 15px;
+        padding: 15px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        margin-bottom: 10px;
+      }
+
+      .leaderboard-user {
+        display: flex;
+        align-items: center;
+      }
+
+      .avatar-container {
+        position: relative;
+        margin-right: 15px;
+      }
+
+      .avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .top-badge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        width: 24px;
+        height: 24px;
+      }
+
+      .user-details h4 {
+        font-size: 18px;
+        margin: 0;
+        color: #ff4d4f;
+        font-weight: bold;
+      }
+
+      .user-rank {
+        font-size: 14px;
+        color: #ff4d4f;
+        background-color: rgba(255, 77, 79, 0.1);
+        padding: 4px 10px;
+        border-radius: 15px;
+        margin-top: 6px;
+        display: inline-block;
+      }
+
+      /* Donation Amount Styles */
+      .donation-amount {
+        text-align: right;
+      }
+
+      .donation-amount h3 {
+        font-size: 18px;
+        color: #ff4d4f;
+        font-weight: bold;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      .donation-amount img {
+        width: 22px;
+        margin-right: 6px;
+      }
+
+      .donation-text {
+        font-size: 14px;
+        color: #666;
+        margin-top: 6px;
+      }
+
+      /* Tab Button Styles */
+      .btn-outline-danger {
+        color: #ff4d4f;
+        border-color: #ff4d4f;
+      }
+
+      .btn-outline-danger:hover,
+      .btn-outline-danger.active {
+        background-color: #ff4d4f;
+        border-color: #ff4d4f;
+        color: white;
+      }
+
+      /* Pengalang Dana Tab Styles */
+      #pengalang-content .donation-amount h3 {
+        color: #ff4d4f;
+      }
+
+      #pengalang-content .donation-amount img {
+        width: 22px;
+        margin-right: 6px;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 480px) {
+        /* Tab Navigation */
+        .btn-outline-danger.tab-button {
+          font-size: 14px;
+          padding: 6px 10px;
+        }
+
+        /* Leaderboard Title and Subtitle */
+        .leaderboard-title {
+          font-size: 18px;
+          margin: 12px 10px;
+        }
+
+        .leaderboard-subtitle {
+          font-size: 12px;
+          margin: -8px 10px 12px;
+        }
+
+        /* Leaderboard Items */
+        .leaderboard-item {
+          margin: 10px;
+          padding: 12px 10px;
+        }
+
+        /* Avatar and Badge */
+        .avatar {
+          width: 45px;
+          height: 45px;
+        }
+
+        .avatar-container {
+          margin-right: 10px;
+        }
+
+        .top-badge {
+          width: 20px;
+          height: 20px;
+          top: -6px;
+          right: -6px;
+        }
+
+        /* User Details */
+        .user-details h4 {
+          font-size: 16px;
+        }
+
+        .user-rank {
+          font-size: 12px;
+          padding: 3px 8px;
+          margin-top: 4px;
+        }
+
+        /* Donation Amount */
+        .donation-amount h3 {
+          font-size: 15px;
+        }
+
+        .donation-amount img {
+          width: 18px;
+          margin-right: 4px;
+        }
+
+        .donation-text {
+          font-size: 12px;
+          margin-top: 4px;
+        }
+
+        /* Content padding */
+        .leaderboard-content {
+          padding: 0 5px;
+        }
+
+        /* Pengalang Dana responsive adjustments */
+        #pengalang-content .leaderboard-title {
+          font-size: 18px;
+          margin: 12px 10px;
+        }
+
+        #pengalang-content .leaderboard-subtitle {
+          font-size: 12px;
+          margin: -8px 10px 12px;
+        }
+
+        #pengalang-content .donation-amount h3 {
+          font-size: 15px;
+        }
+
+        #pengalang-content .donation-amount img {
+          width: 18px;
+          margin-right: 4px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="col-12 justify-content-center d-flex">
+      <div class="col-12 bg-white col-md-6">
+        <!-- Navbar Back -->
+        <div class="navbar-back col-12 align-items-center d-flex">
+          <a href="detail-kampanye.html" class="bg-white">
+            <i class="fa-solid fa-angle-left"></i>
+          </a>
+          <h1 class="text-white mb-0 ms-2">Leaderboard</h1>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="d-flex justify-content-center gap-2 m-3">
+          <button
+            class="btn btn-outline-danger tab-button w-50 active"
+            data-target="donatur"
+          >
+            Donatur
+          </button>
+          <button
+            class="btn btn-outline-danger tab-button w-50"
+            data-target="pengalang"
+          >
+            Penggalang Dana
+          </button>
+        </div>
+
+        <!-- Donatur Leaderboard Content -->
+        <div class="leaderboard-content" id="donatur-content">
+          <h2 class="leaderboard-title">10 Donasi Terbanyak Bulan ini</h2>
+          <p class="leaderboard-subtitle">
+            Diambil berdasarkan jumlah transaksi donasi terbanyak
+          </p>
+
+          <!-- Leaderboard Items -->
+          <div class="leaderboard-item">
+            <div class="leaderboard-user">
+              <div class="avatar-container">
+                <img
+                  src="assets/img/avatar/avatar1.png"
+                  alt="Lisa Bella"
+                  class="avatar"
+                />
+                <img
+                  src="assets/img/icon/top1-donasi.svg"
+                  alt="Top 1"
+                  class="top-badge"
+                />
+              </div>
+              <div class="user-details">
+                <h4>Lisa Bella</h4>
+                <span class="user-rank">Top 1 Leaderboard</span>
+              </div>
+            </div>
+            <div class="donation-amount">
+              <h3>
+                <img src="assets/img/icon/dompet.svg" alt="Dompet" />
+                Rp 40.000.000
+              </h3>
+              <p class="donation-text">Total Donasi</p>
+            </div>
+          </div>
+
+          <div class="leaderboard-item">
+            <div class="leaderboard-user">
+              <div class="avatar-container">
+                <img
+                  src="assets/img/avatar/avatar2.png"
+                  alt="William Saliba"
+                  class="avatar"
+                />
+                <img
+                  src="assets/img/icon/top2-donasi.svg"
+                  alt="Top 2"
+                  class="top-badge"
+                />
+              </div>
+              <div class="user-details">
+                <h4>William Saliba</h4>
+                <span class="user-rank">Top 2 Leaderboard</span>
+              </div>
+            </div>
+            <div class="donation-amount">
+              <h3>
+                <img src="assets/img/icon/dompet.svg" alt="Dompet" />
+                Rp 30.000.000
+              </h3>
+              <p class="donation-text">Total Donasi</p>
+            </div>
+          </div>
+
+          <div class="leaderboard-item">
+            <div class="leaderboard-user">
+              <div class="avatar-container">
+                <img
+                  src="assets/img/avatar/avatar3.png"
+                  alt="Andrew Sorloth"
+                  class="avatar"
+                />
+                <img
+                  src="assets/img/icon/top3-donasi.svg"
+                  alt="Top 3"
+                  class="top-badge"
+                />
+              </div>
+              <div class="user-details">
+                <h4>Andrew Sorloth</h4>
+                <span class="user-rank">Top 3 Leaderboard</span>
+              </div>
+            </div>
+            <div class="donation-amount">
+              <h3>
+                <img src="assets/img/icon/dompet.svg" alt="Dompet" />
+                Rp 25.000.000
+              </h3>
+              <p class="donation-text">Total Donasi</p>
+            </div>
+          </div>
+
+          <div class="leaderboard-item">
+            <div class="leaderboard-user">
+              <div class="avatar-container">
+                <img
+                  src="assets/img/avatar/avatar4.png"
+                  alt="Isabella Rumbela"
+                  class="avatar"
+                />
+              </div>
+              <div class="user-details">
+                <h4>Isabella Rumbela</h4>
+                <span class="user-rank">Top 4 Leaderboard</span>
+              </div>
+            </div>
+            <div class="donation-amount">
+              <h3>
+                <img src="assets/img/icon/dompet.svg" alt="Dompet" />
+                Rp 21.000.000
+              </h3>
+              <p class="donation-text">Total Donasi</p>
+            </div>
+          </div>
+
+          <div class="leaderboard-item">
+            <div class="leaderboard-user">
+              <div class="avatar-container">
+                <img
+                  src="assets/img/avatar/avatar5.png"
+                  alt="James Van"
+                  class="avatar"
+                />
+              </div>
+              <div class="user-details">
+                <h4>James Van</h4>
+                <span class="user-rank">Top 5 Leaderboard</span>
+              </div>
+            </div>
+            <div class="donation-amount">
+              <h3>
+                <img src="assets/img/icon/dompet.svg" alt="Dompet" />
+                Rp 19.000.000
+              </h3>
+              <p class="donation-text">Total Donasi</p>
+            </div>
+          </div>
+
+          <div class="leaderboard-item">
+            <div class="leaderboard-user">
+              <div class="avatar-container">
+                <img
+                  src="assets/img/avatar/avatar6.png"
+                  alt="Amelia Iska"
+                  class="avatar"
+                />
+              </div>
+              <div class="user-details">
+                <h4>Amelia Iska</h4>
+                <span class="user-rank">Top 6 Leaderboard</span>
+              </div>
+            </div>
+            <div class="donation-amount">
+              <h3>
+                <img src="assets/img/icon/dompet.svg" alt="Dompet" />
+                Rp 18.000.000
+              </h3>
+              <p class="donation-text">Total Donasi</p>
+            </div>
+          </div>
+
+          <!-- Add padding at the bottom for footer -->
+          <div style="height: 80px"></div>
+        </div>
+
+        <!-- Penggalang Dana Leaderboard Content -->
+        <div class="leaderboard-content" id="pengalang-content">
+          <h2 class="leaderboard-title">
+            10 Penggalang Dana Terbaik Bulan ini
+          </h2>
+          <p class="leaderboard-subtitle">
+            Diambil berdasarkan jumlah donatur terbanyak
+          </p>
+
+          <!-- Leaderboard Items -->
+          <div class="leaderboard-item">
+            <div class="leaderboard-user">
+              <div class="avatar-container">
+                <img
+                  src="assets/img/merawat-indonesia.png"
+                  alt="Merawat Indonesia"
+                  class="avatar"
+                />
+              </div>
+              <div class="user-details">
+                <h4>Merawat Indonesia</h4>
+                <span class="user-rank">Top 1 Leaderboard</span>
+              </div>
+            </div>
+            <div class="donation-amount">
+              <h3>
+                <img src="assets/img/icon/total-donatur.svg" alt="Donatur" />
+                9829
+              </h3>
+              <p class="donation-text">Total Donatur</p>
+            </div>
+          </div>
+
+          <div class="leaderboard-item">
+            <div class="leaderboard-user">
+              <div class="avatar-container">
+                <img
+                  src="assets/img/merawat-indonesia.png"
+                  alt="Merawat Indonesia"
+                  class="avatar"
+                />
+              </div>
+              <div class="user-details">
+                <h4>Merawat Indonesia</h4>
+                <span class="user-rank">Top 2 Leaderboard</span>
+              </div>
+            </div>
+            <div class="donation-amount">
+              <h3>
+                <img src="assets/img/icon/total-donatur.svg" alt="Donatur" />
+                9829
+              </h3>
+              <p class="donation-text">Total Donatur</p>
+            </div>
+          </div>
+
+          <div class="leaderboard-item">
+            <div class="leaderboard-user">
+              <div class="avatar-container">
+                <img
+                  src="assets/img/merawat-indonesia.png"
+                  alt="Merawat Indonesia"
+                  class="avatar"
+                />
+              </div>
+              <div class="user-details">
+                <h4>Merawat Indonesia</h4>
+                <span class="user-rank">Top 3 Leaderboard</span>
+              </div>
+            </div>
+            <div class="donation-amount">
+              <h3>
+                <img src="assets/img/icon/total-donatur.svg" alt="Donatur" />
+                9829
+              </h3>
+              <p class="donation-text">Total Donatur</p>
+            </div>
+          </div>
+
+          <div class="leaderboard-item">
+            <div class="leaderboard-user">
+              <div class="avatar-container">
+                <img
+                  src="assets/img/merawat-indonesia.png"
+                  alt="Merawat Indonesia"
+                  class="avatar"
+                />
+              </div>
+              <div class="user-details">
+                <h4>Merawat Indonesia</h4>
+                <span class="user-rank">Top 4 Leaderboard</span>
+              </div>
+            </div>
+            <div class="donation-amount">
+              <h3>
+                <img src="assets/img/icon/total-donatur.svg" alt="Donatur" />
+                9829
+              </h3>
+              <p class="donation-text">Total Donatur</p>
+            </div>
+          </div>
+
+          <div class="leaderboard-item">
+            <div class="leaderboard-user">
+              <div class="avatar-container">
+                <img
+                  src="assets/img/merawat-indonesia.png"
+                  alt="Merawat Indonesia"
+                  class="avatar"
+                />
+              </div>
+              <div class="user-details">
+                <h4>Merawat Indonesia</h4>
+                <span class="user-rank">Top 5 Leaderboard</span>
+              </div>
+            </div>
+            <div class="donation-amount">
+              <h3>
+                <img src="assets/img/icon/total-donatur.svg" alt="Donatur" />
+                9829
+              </h3>
+              <p class="donation-text">Total Donatur</p>
+            </div>
+          </div>
+
+          <div class="leaderboard-item">
+            <div class="leaderboard-user">
+              <div class="avatar-container">
+                <img
+                  src="assets/img/merawat-indonesia.png"
+                  alt="Merawat Indonesia"
+                  class="avatar"
+                />
+              </div>
+              <div class="user-details">
+                <h4>Merawat Indonesia</h4>
+                <span class="user-rank">Top 6 Leaderboard</span>
+              </div>
+            </div>
+            <div class="donation-amount">
+              <h3>
+                <img src="assets/img/icon/total-donatur.svg" alt="Donatur" />
+                9829
+              </h3>
+              <p class="donation-text">Total Donatur</p>
+            </div>
+          </div>
+
+          <!-- Add padding at the bottom for footer -->
+          <div style="height: 80px"></div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+          <div class="main-menu">
+            <a href="index.html">
+              <img src="assets/img/main-menu/beranda.svg" alt="Beranda" />
+              <p>Beranda</p>
+            </a>
+            <a href="galang-dana.html">
+              <img
+                src="assets/img/main-menu/galang dana.svg"
+                alt="Galang Dana"
+              />
+              <p>Galang Dana</p>
+            </a>
+            <a href="eksplore-kampanye.html" class="donasi-menu">
+              <img src="assets/img/main-menu/donasi.svg" alt="Donasi" />
+              <p>Donasi</p>
+            </a>
+            <a href="leaderboard.html">
+              <img
+                src="assets/img/main-menu/leaderboard.svg"
+                alt="Leaderboard"
+              />
+              <p>Leaderboard</p>
+            </a>
+            <a href="profile.html">
+              <img src="assets/img/main-menu/profile.svg" alt="Profile" />
+              <p>Profile</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+    <script>
+      // Tab switching functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const tabButtons = document.querySelectorAll(".tab-button");
+        const donaturContent = document.getElementById("donatur-content");
+        const pengalangContent = document.getElementById("pengalang-content");
+
+        // Hide pengalang content initially
+        if (pengalangContent) {
+          pengalangContent.style.display = "none";
+        }
+
+        tabButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            // Remove active class from all buttons
+            tabButtons.forEach((btn) => btn.classList.remove("active"));
+
+            // Add active class to clicked button
+            this.classList.add("active");
+
+            // Show/hide appropriate content based on the tab
+            const target = this.getAttribute("data-target");
+            if (target === "donatur") {
+              donaturContent.style.display = "block";
+              if (pengalangContent) {
+                pengalangContent.style.display = "none";
+              }
+            } else if (target === "pengalang") {
+              donaturContent.style.display = "none";
+              if (pengalangContent) {
+                pengalangContent.style.display = "block";
+              }
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
